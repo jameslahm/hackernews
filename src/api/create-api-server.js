@@ -16,13 +16,12 @@ export function createAPI({ config, version }) {
 			maxAge: 1000 * 60 * 15,
 		})
 
-		api.cachedIds = {}[('top', 'new', 'show', 'ask', 'job')].forEach(
-			(type) => {
-				api.child(`${type}stories`).on('value', (snapshot) => {
-					api.cachedIds[type] = snapshot.val()
-				})
-			}
-		)
+		api.cachedIds = {}
+		;[('top', 'new', 'show', 'ask', 'job')].forEach((type) => {
+			api.child(`${type}stories`).on('value', (snapshot) => {
+				api.cachedIds[type] = snapshot.val()
+			})
+		})
 	}
 
 	return api
