@@ -38,7 +38,7 @@ function fetch(child){
     }
 }
 
-export function fetchIDsByType(type){
+export function fetchIdsByType(type){
     return api.cacheIds && api.cachedIds[type]
     ? Promise.resolve(api.cacheIds[type]):fetch(`${type}stories`)
 }
