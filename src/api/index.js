@@ -14,7 +14,7 @@ if(api.onServer){
 }
 
 function warmCache(){
-    fetchItems((api.cacheIds.top || []).slice(0,30))
+    fetchItems((api.cachedIds.top || []).slice(0,30))
     setTimeout(warmCache,1000*60*15)
 }
 

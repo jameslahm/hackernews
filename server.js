@@ -6,7 +6,7 @@ const favicon = require('serve-favicon')
 const compression = require('compression')
 const microcache = require('route-cache')
 const resolve = (file) => path.resolve(__dirname, file)
-const { createBundleRenderer } = require('vue-ssr')
+const { createBundleRenderer } = require('vue-server-renderer')
 
 const isProd = process.env.NODE_ENV === 'production'
 const useMicroCache = process.env.MICRO_CACHE !== 'false'
@@ -35,7 +35,7 @@ let readyPromise
 const templatePath = resolve('./src/index.template.html')
 
 if (isProd) {
-	const template = fs.readFileSync(template, 'utf-8')
+	const template = fs.readFileSync(templatePath, 'utf-8')
 	const bundle = require('./dist/vue-ssr-server-bundle.json')
 
 	const clientManifest = require('./dist/vue-ssr-client-manifest.json')
@@ -60,8 +60,8 @@ const serve=(path,cache)=>express.static(resolve(path),{
 
 app.use(compression({threshold:0}))
 app.use(favicon('./public/logo-48.png'))
-app.use('./dist',serve('./dist',true))
-app.use('./public',serve('./dist',true))
+app.use('/dist',serve('./dist',true))
+app.use('/public',serve('./public',true))
 app.use('/manifest.json',serve('./manifest.json',true))
 app.use('/service-worker.js',serve('./dist/service-worker.js'))
 

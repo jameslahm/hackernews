@@ -8,9 +8,9 @@ import * as filters from './util/filters'
 
 Vue.mixin(titleMixin)
 
-Object.keys(filters.forEach(key=>{
+Object.keys(filters).forEach(key=>{
     Vue.filter(key,filters[key])
-}))
+})
 
 export function createApp(){
     const store=createStore()

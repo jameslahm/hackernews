@@ -46,6 +46,7 @@ a
     top 0
     left 0
     right 0
+    z-index 999
     .inner 
         max-width 800px
         box-sizing border-box 
@@ -72,7 +73,7 @@ a
         margin 0
         float right
 .logo 
-    with 24px
+    width 24px
     margin-right 10px
     display inline-block
     vertical-align middle 

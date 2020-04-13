@@ -58,7 +58,7 @@ module.exports = function setupDevServer(app, templatePath, cb) {
 	clientCompiler.plugin('done', stats => {
 		stats = stats.toJson()
 		stats.errors.forEach(err => console.error(err))
-		stats.warning.forEach(err => console.warn(err))
+		stats.warnings.forEach(err => console.warn(err))
 		if (stats.errors.length) return
 		clientManifest = JSON.parse(
 			readFile(devMiddleware.fileSystem, 'vue-ssr-client-manifest.json')
@@ -66,7 +66,7 @@ module.exports = function setupDevServer(app, templatePath, cb) {
 		update()
     })
     
-    app.use(require('webpack-hot-middleware'))(clientCompiler,{heartneat:5000})
+    app.use(require('webpack-hot-middleware')(clientCompiler,{heartneat:5000}))
 
     const serverCompiler=webpack(serverConfig)
     const mfs=new MFS()

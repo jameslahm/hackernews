@@ -19,15 +19,15 @@
 			<div class="item-view-comments">
 				<p class="item-view-comments-header">
 					{{
-						item.kid
-							? item.descendants + 'comments'
+						item.kids
+							? item.descendants + ' comments'
 							: 'No comments yet.'
 					}}
 					<spinner :show="loading"></spinner>
 				</p>
 				<ul
 					class="comment-children"
-					v-if="id in item.kids"
+					v-if="item.kids"
 					:key="id"
 					:id="id"
 				>
@@ -48,22 +48,23 @@ import Comment from '../components/Comment.vue'
 
 export default {
 	name: 'item-view',
+	props: ['id'],
 	components: { Spinner, Comment },
 	data: () => ({
-		loading: true,
+		loading: true
 	}),
 
 	computed: {
 		item() {
-			return this.$store.state.items[this.$route.param.id]
-		},
+			return this.$store.state.items[this.$route.params.id]
+		}
 	},
 
 	asyncData({
 		store,
 		route: {
-			params: { id },
-		},
+			params: { id }
+		}
 	}) {
 		return store.dispatch('FETCH_ITEMS', { ids: [id] })
 	},
@@ -77,7 +78,7 @@ export default {
 	},
 
 	watch: {
-		item: 'fetchComments',
+		item: 'fetchComments'
 	},
 
 	methods: {
@@ -91,19 +92,19 @@ export default {
 			fetchComments(this.$store, this.item).then(() => {
 				this.loading = false
 			})
-		},
-	},
+		}
+	}
 }
 
 function fetchComments(store, item) {
 	if (item && item.kids) {
 		return store
 			.dispatch('FETCH_ITEMS', {
-				ids: item.kids,
+				ids: item.kids
 			})
 			.then(() =>
 				Promise.all(
-					item.kids.map((id) => {
+					item.kids.map(id => {
 						return fetchComments(store, store.state.items[id])
 					})
 				)
@@ -117,18 +118,18 @@ function fetchComments(store, item) {
     background-color #ffffff
     padding 1.8em 2em 1em
     box-shadow 0 1px 2px rgba(0,0,0,.1)
-    h1 
+    h1
       display inline
       font-size 1.5em
       margin 0
       margin-right .5em
-    .host,.meta,.meta a 
+    .host,.meta,.meta a
       color #828282
-    .meta a 
+    .meta a
       text-decoration underline
 
 .item-view-comments
-  background-color $fff
+  background-color #fff
   margin-top 10px
   padding 0 2em .5em
 
@@ -146,9 +147,8 @@ function fetchComments(store, item) {
   padding 0
   margin 0
 
-@media (max-width 600px) {
+@media (max-width 600px)
   .item-view-header
-    h1 
+    h1
       font-size 1.25em
-}
 </style>

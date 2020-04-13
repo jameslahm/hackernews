@@ -31,73 +31,83 @@
 </template>
 
 <script>
-import {watchList} from '../api'
+import { watchList } from '../api'
 import Item from '../components/Item.vue'
 
 export default {
-  name:'item-list',
-  components:{
-    Item
-  },
-  props:{
-    type:String
-  },
-  data(){
-    return {
-      transition:'slide-right',
-      displayedPage:Number(this.$route.params.page) || 1,
-      displayedItems:this.$store.getters.activeItems
-    }
-  },
-  computed:{
-    page(){
-      return Number(this.$route.params.page)||1
-    },
-    maxPage(){
-      const {itemsPerPage,lists}=this.$store.state 
-      return Math.ceil(lists[this.type].length/itemsPerPage)
-    },
-    hasMore(){
-      return this.page<this.maxPage
-    }
-  },
-  beforeMount(){
-    if(this.$root._isMounted){
-      this.loadItems(this.page)
-    }
+	name: 'item-list',
+	components: {
+		Item
+	},
+	props: {
+		type: String
+	},
+	data() {
+		return {
+			transition: 'slide-right',
+			displayedPage: Number(this.$route.params.page) || 1,
+			displayedItems: this.$store.getters.activeItems
+		}
+	},
+	computed: {
+		page() {
+			return Number(this.$route.params.page) || 1
+		},
+		maxPage() {
+			const { itemsPerPage, lists } = this.$store.state
+			return Math.ceil(lists[this.type].length / itemsPerPage)
+		},
+		hasMore() {
+			return this.page < this.maxPage
+		}
+	},
+	beforeMount() {
+		if (this.$root._isMounted) {
+			this.loadItems(this.page)
+		}
 
-    this.unwatchlist=watchList(this.type,ids=>{
-      this.$store.commit('SET_LIST',{type:this.type,ids})
-      this.$store.dispatch('ENSURE_ACTIVE_ITEMS').then(()=>{
-        this.displayedItems=this.$store.getters.activeItems
-      })
-    })
-  },
+		this.unwatchlist = watchList(this.type, ids => {
+			this.$store.commit('SET_LIST', { type: this.type, ids })
+			this.$store.dispatch('ENSURE_ACTIVE_ITEMS').then(() => {
+				this.displayedItems = this.$store.getters.activeItems
+			})
+		})
+	},
 
-  beforeDestroy(){
-    this.unwatchlist()
-  },
-  watch:{
-    page(to,from){
-      this.loadItems(to,from)
-    }
-  },
+	beforeDestroy() {
+		this.unwatchlist()
+	},
+	watch: {
+		page(to, from) {
+			this.loadItems(to, from)
+		}
+	},
 
-  methods:{
-    loadItems(to=this.page,from=-1){
-      this.$bar.start()
-      this.$store.dispatch('FETCH_LIST_DATA',{type:this.type}).then(()=>{
-        if(this.page<0 || this.page>this.maxPage){
-          this.$router.replace(`/${this.type}/1`)
-          return
-        }
-        this.transition=from===-1?null :to>from ?'slide-left':'slide-right'
-        this.displayedPage=to
-        this.displayedItems=this.$store.getters.activeItems
-        this.$bar.finish()
-      })
-    }
-  }
+	methods: {
+		loadItems(to = this.page, from = -1) {
+			this.$bar.start()
+			this.$store
+				.dispatch('FETCH_LIST_DATA', { type: this.type })
+				.then(() => {
+					if (this.page < 0 || this.page > this.maxPage) {
+						this.$router.replace(`/${this.type}/1`)
+						return
+					}
+					this.transition =
+						from === -1
+							? null
+							: to > from
+							? 'slide-left'
+							: 'slide-right'
+					this.displayedPage = to
+          this.displayedItems = this.$store.getters.activeItems
+          
+          console.log("Fetch End")
+
+					this.$bar.finish()
+				})
+		}
+	}
 }
 </script>
 
@@ -105,30 +115,31 @@ export default {
 .news-view
   padding-top 45px
 
-.news-list-nav,.news-list 
+.news-list-nav,.news-list
   background-color #ffffff
   border-radius 2px
 
-.news-list-nav 
+.news-list-nav
   padding 15px 30px
   position fixed
   text-align center
   top 55px
   left 0
+  right 0
   z-index 998
   box-shadow 0 1px 2px rgba(0,0,0,.1)
-  a 
+  a
     margin 0 1em
   .disabled
     color #cccccc
 
-.news-list 
-  position abslute 
+.news-list
+  position absolute
   margin 30px 0
   width 100%
   transition all .5s cubic-bezier(.55,0,.1,1)
-  ul 
-    list-style-type none 
+  ul
+    list-style-type none
     padding 0
     margin 0
 
@@ -136,23 +147,23 @@ export default {
   opacity 0
   transform translate(30px,0)
 
-.slide-left-leave-to,.slide-right-enter 
+.slide-left-leave-to,.slide-right-enter
   opacity 0
   transform translate(-30px,0)
 
-.item-move,.item-enter-active,.item-leave-active 
-  transition all .5s cubic-bezier(.55,0,.1,1)
+.item-move,.item-enter-active,.item-leave-active
+  transition all 0.5s cubic-bezier(.55,0,.1,1)
 
-.item-enter 
+.item-enter
   opacity 0
   transform translate(30px,0)
 
-.item-leave-to 
+.item-leave-to
   position absolute
   opacity 0
   transform translate(30px,0)
 
 @media (max-width 600px)
-  .news-list 
+  .news-list
     margin 10px 0
 </style>

@@ -29,12 +29,12 @@ $duration=1.4s
     &.v-enter-to,&.v-leave 
         opacity 1
 
-@keyframes rotator {
+@keyframes rotator 
     0%
         transform scale(0.5) rotate(0deg)
     100%
         transform scale(0.5) rotate(270deg)
-}
+
 
 .spinner .path 
     stroke #ff6600
@@ -43,7 +43,7 @@ $duration=1.4s
     transform-origin center
     animation dash $duration ease-in-out infinite
 
-@keyframes dash {
+@keyframes dash 
     0%
         stroke-dashoffset $offset
     50%
@@ -52,6 +52,6 @@ $duration=1.4s
     100%
         stroke-dashoffset $offset
         transform rotate(450deg)
-}
+
 </style>
 

@@ -41,12 +41,12 @@ export default {
 
 <style lang="stylus">
 .comment-children
-    .comment-child 
+    .comment-children
         margin-left 1.5em
 
 .comment 
     border-top 1px solid #eeeeee
-    position 
+    position relative
     .by,.text,.toggle 
         font-size .9em
         margin 1em 0
@@ -61,15 +61,15 @@ export default {
             color #ff6600 
         pre 
             white-space pre-wrap
-        .toggle 
-            background-color #fffbf2 
-            padding .3em .5em 
-            border-radius 4px
-            a 
-                color #828282
-                cursor pointer 
-            &.open 
-                padding 0
-                background-color transparent 
-                margin-bottom -0.5em
+    .toggle 
+        background-color #fffbff
+        padding .3em .5em 
+        border-radius 4px
+        a 
+            color #828282
+            cursor pointer 
+        &.open 
+            padding 0
+            background-color transparent 
+            margin-bottom -0.5em
 </style>
