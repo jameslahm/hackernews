@@ -101,7 +101,6 @@ export default {
 							: 'slide-right'
 					this.displayedPage = to
           this.displayedItems = this.$store.getters.activeItems
-          
           console.log("Fetch End")
 
 					this.$bar.finish()
