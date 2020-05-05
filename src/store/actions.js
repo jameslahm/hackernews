@@ -12,6 +12,7 @@ export default {
 			)
 	},
 
+	
 	ENSURE_ACTIVE_ITEMS: ({ dispatch, getters }) => {
 		return dispatch('FETCH_ITEMS', {
 			ids: getters.activeIds
