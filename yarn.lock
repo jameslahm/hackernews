@@ -6887,10 +6887,10 @@ ripemd160@^2.0.0, ripemd160@^2.0.1:
     hash-base "^3.0.0"
     inherits "^2.0.1"
 
-route-cache@0.4.4:
-  version "0.4.4"
-  resolved "https://registry.yarnpkg.com/route-cache/-/route-cache-0.4.4.tgz#c7141fac4e44d1480dae1c1ba44458d91ad1a98a"
-  integrity sha512-+9XiiQAVE0PFvnDEehu8hW2rvx4Epy/O5pHjSFQ6yYEF3Bkag3cPOJkBtPB/uK8m1zInaQvUvRmqxoqxQeplJA==
+route-cache@0.4.5:
+  version "0.4.5"
+  resolved "https://registry.yarnpkg.com/route-cache/-/route-cache-0.4.5.tgz#4969495f8a673739e90d2add49eba1fcfb8f8dc2"
+  integrity sha512-Z/nUYyOJR7hEMS+om8Qao5XKC/FmMQNeTuTukDvT7dZNrsw37OZXgsiN7gxZBhxB5JJtYi5NfTjHVteadetFug==
   dependencies:
     debug "3.1.0"
     lru-cache "4.0.1"
