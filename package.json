@@ -20,7 +20,7 @@
     "es6-promise": "^4.1.1",
     "express": "^4.16.2",
     "extract-text-webpack-plugin": "^3.0.2",
-    "firebase": "7.17.0",
+    "firebase": "7.17.1",
     "jest": "^26.0.1",
     "jest-serializer-vue": "^2.0.2",
     "jest-transform-stub": "^2.0.0",
