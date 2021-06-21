@@ -51,7 +51,7 @@
     "url-loader": "^4.1.1",
     "vue-loader": "^15.9.7",
     "vue-template-compiler": "^2.6.14",
-    "webpack": "^5.39.0",
+    "webpack": "^5.40.0",
     "webpack-dev-middleware": "^5.0.0",
     "webpack-hot-middleware": "^2.20.0",
     "webpack-merge": "^5.8.0",
